@@ -1,7 +1,6 @@
 // LINK TO THE LEVELS IN SYLLABUS
 // https://syllabus.codeyourfuture.io/js-core-3/tv-show-dom-project/level-100
 
-//You can edit ALL of the code here
 const body = document.querySelector("body");
 body.style.backgroundColor = "#f2f3f3";
 const rootElem = document.getElementById("root");
@@ -22,13 +21,13 @@ function makePageForEpisodes(episodeList) {
     .map((episode) => {
       return `
     <ul> 
-    <div style = "border: 1px solid lightgray; border-radius: 20px; padding: 20px; text-align: center; height: 450px">
+    <div style = "background-color: white; border: 1px solid lightgray; border-radius: 20px; padding: 20px; text-align: center; height: 450px">
           <li class = "episode" style = "list-style-type: none">
               <h3>
                   S0${episode.season}E0${episode.number} - ${episode.name}
               </h3>
-              <img src = ${episode.image.medium}></img>
-              <p>${episode.summary}</p>
+              <img src = ${episode.image.medium} style = "margin-top: 10px"></img>
+              <p style = "margin-top: 50px">${episode.summary}</p>
               
               
         </li>
