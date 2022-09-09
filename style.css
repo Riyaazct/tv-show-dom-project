@@ -1,3 +1,7 @@
 #root {
-  /* color: red; */
+  color: #3b3b3b;
+}
+
+input {
+  content: "🔍";
 }
