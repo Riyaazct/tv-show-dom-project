@@ -1,7 +1,9 @@
 #root {
-  color: #3b3b3b;
 }
 
 input {
-  content: "🔍";
+  border: none;
+  background-color: #f2f3f3;
+  border-bottom: 1px solid gray;
+  font-size: 25px;
 }
