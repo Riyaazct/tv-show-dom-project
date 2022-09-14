@@ -80,4 +80,30 @@ search.addEventListener("keyup", (e) => {
   makePageForEpisodes(filteredEpisodes);
 });
 
+// Select field for level 300
+let listOfEpisodes = getAllEpisodes();
+const select = document.createElement("select");
+select.id = "select";
+select.name = "select";
+searchBox.insertBefore(select, input);
+
+//Loop for episodes to appear in the select dropdown
+
+listOfEpisodes.map((episode) => {
+  const option = document.createElement("option");
+  option.value = episode.id;
+  option.innerText = `S0${episode.season}E0${episode.number} - ${episode.name}`;
+  select.appendChild(option);
+});
+
+select.addEventListener("click", (e) => {
+  let selected = e.target.value;
+  let filtered = listOfEpisodes.filter((episode) => {
+    if (episode.id == selected) {
+      return `S0${episode.season}E0${episode.number} - ${episode.name}`;
+    }
+  });
+  makePageForEpisodes(filtered);
+});
+
 window.onload = setup; // LEAVE THIS LINE(my comment)
