@@ -54,14 +54,13 @@ searchBox.style.alignContent = "center";
 // search input field
 const input = document.createElement("input");
 input.autocomplete = "off";
-input.type = "search";
+input.type = "text";
 input.id = "search";
 input.placeholder = "Search";
 input.style.width = "200px";
 input.style.height = "30px";
 input.style.marginLeft = "30px";
 searchBox.append(input);
-
 const h3 = document.createElement("h3");
 h3.style.margin = "0 0 0 10px";
 searchBox.appendChild(h3);
@@ -82,16 +81,15 @@ search.addEventListener("keyup", (e) => {
 
 // Select field for level 300
 let listOfEpisodes = getAllEpisodes();
-const select = document.createElement("select");
-select.id = "select";
+const select = document.getElementById("select");
 select.name = "select";
 searchBox.insertBefore(select, input);
 
-//Loop for episodes to appear in the select dropdown
+// // Loop for episodes to appear in the select dropdown
 
 listOfEpisodes.map((episode) => {
   const option = document.createElement("option");
-  option.value = episode.id;
+  option.value = episode.name;
   option.innerText = `S0${episode.season}E0${episode.number} - ${episode.name}`;
   select.appendChild(option);
 });
@@ -99,10 +97,13 @@ listOfEpisodes.map((episode) => {
 select.addEventListener("click", (e) => {
   let selected = e.target.value;
   let filtered = listOfEpisodes.filter((episode) => {
-    if (episode.id == selected) {
+    if (selected === "all") {
+      return setup;
+    } else if (episode.name == selected) {
       return `S0${episode.season}E0${episode.number} - ${episode.name}`;
     }
   });
+  h3.innerText = `Displaying ${filtered.length}/${allEpisodes.length}`;
   makePageForEpisodes(filtered);
 });
 
