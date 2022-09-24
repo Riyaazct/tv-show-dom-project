@@ -13,8 +13,20 @@ const theFirstChild = body.firstChild;
 let allEpisodes = [];
 
 function setup() {
-  allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
+  fetch("https://api.tvmaze.com/shows/82/episodes")
+    .then((response) => {
+      if (response.status >= 200 && response.status <= 299) {
+        return response.json();
+      } else {
+        throw new Error(
+          `Encountered something unexpected: ${response.status} ${response.statusText}`
+        );
+      }
+    })
+    .then((data) => {
+      makePageForEpisodes(data);
+      allEpisodes = data;
+    });
 }
 
 function makePageForEpisodes(episodeList) {
@@ -28,13 +40,11 @@ function makePageForEpisodes(episodeList) {
                   S0${episode.season}E0${episode.number} - ${episode.name}
               </h3>
               <img src = ${episode.image.medium} style = "margin-top: 10px"></img> 
-              <div style = "">
+              <div>
                 <p >${episode.summary}</p>
               </div>
-              
         </li>
     </div>
-    
     </ul> `;
     })
     .join("");
@@ -58,8 +68,8 @@ input.autocomplete = "off";
 input.type = "text";
 input.id = "search";
 input.placeholder = "Search";
-input.style.width = "200px";
-input.style.height = "30px";
+// input.style.width = "200px";
+// input.style.height = "30px";
 input.style.marginLeft = "30px";
 searchBox.append(input);
 const h3 = document.createElement("h3");
