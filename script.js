@@ -6,7 +6,8 @@ body.style.backgroundColor = "#f2f3f3";
 const rootElem = document.getElementById("root");
 rootElem.style.display = "grid";
 rootElem.style.gap = "10px";
-rootElem.style.gridTemplateColumns = "repeat(auto-fit, minmax(320px,1fr))";
+rootElem.style.gridTemplateColumns =
+  "repeat(auto-fit, minmax(320px,1fr))";
 rootElem.style.justifyContent = "center";
 const theFirstChild = body.firstChild;
 let allEpisodes = [];
@@ -21,7 +22,7 @@ function makePageForEpisodes(episodeList) {
     .map((episode) => {
       return `
     <ul> 
-    <div style = "background-color: white; border: 1px solid lightgray; border-radius: 20px; padding: 20px 30px 0 30px; text-align: center; height: 550px">
+    <div style = "background-color: white; border: 1px solid lightGray; border-radius: 20px; padding: 20px 30px 0 30px; text-align: center; height: 550px">
           <li class = "episode" style = "list-style-type: none">
               <h3>
                   S0${episode.season}E0${episode.number} - ${episode.name}
