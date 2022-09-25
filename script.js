@@ -11,6 +11,7 @@ rootElem.style.gridTemplateColumns =
 rootElem.style.justifyContent = "center";
 const theFirstChild = body.firstChild;
 let allEpisodes = [];
+allEpisodes = getAllEpisodes(); // remove when done
 
 function setup() {
   fetch("https://api.tvmaze.com/shows/82/episodes")
@@ -52,29 +53,20 @@ function makePageForEpisodes(episodeList) {
 }
 
 // Search box div
-
-let searchBox = document.createElement("div");
-searchBox.style.margin = "10px 0";
-searchBox.style.display = "flex";
-searchBox.style.alignItems = "center";
-searchBox.id = "searchBox";
-searchBox.style.padding = "10px";
-body.insertBefore(searchBox, theFirstChild);
-searchBox.style.alignContent = "center";
+let searchContainer = document.querySelector("#searchContainer");
+searchContainer.style.width = "100%";
 
 // search input field
 const input = document.createElement("input");
 input.autocomplete = "off";
 input.type = "text";
 input.id = "search";
+input.style.marginLeft = "auto";
 input.placeholder = "Search";
-// input.style.width = "200px";
-// input.style.height = "30px";
-input.style.marginLeft = "30px";
-searchBox.append(input);
+searchContainer.append(input);
 const h3 = document.createElement("h3");
 h3.style.margin = "0 0 0 10px";
-searchBox.appendChild(h3);
+searchContainer.appendChild(h3);
 
 // Event listener for search
 search.addEventListener("keyup", (e) => {
@@ -91,14 +83,12 @@ search.addEventListener("keyup", (e) => {
 });
 
 // Select field for level 300
-let listOfEpisodes = getAllEpisodes();
+// let listOfEpisodes = getAllEpisodes(); //this needs to be changed when done
 const select = document.getElementById("select");
-select.name = "select";
-searchBox.insertBefore(select, input);
 
 // // Loop for episodes to appear in the select dropdown
 
-listOfEpisodes.map((episode) => {
+allEpisodes.map((episode) => {
   const option = document.createElement("option");
   option.value = episode.name;
   option.innerText = `S0${episode.season}E0${episode.number} - ${episode.name}`;
@@ -107,9 +97,9 @@ listOfEpisodes.map((episode) => {
 
 select.addEventListener("click", (e) => {
   let selected = e.target.value;
-  let filtered = listOfEpisodes.filter((episode) => {
+  let filtered = allEpisodes.filter((episode) => {
     if (selected === "all") {
-      return setup;
+      return allEpisodes;
     } else if (episode.name == selected) {
       return `S0${episode.season}E0${episode.number} - ${episode.name}`;
     }
@@ -118,4 +108,29 @@ select.addEventListener("click", (e) => {
   makePageForEpisodes(filtered);
 });
 
-window.onload = setup; // LEAVE THIS LINE(my comment)
+const allShows = getAllShows();
+// select for shows
+
+const select2 = document.querySelector("#select2");
+allShows.map((show) => {
+  const option = document.createElement("option");
+  option.value = show.name;
+  option.innerText = `${show.name}`;
+  select2.appendChild(option);
+});
+
+select2.addEventListener("click", (e) => {
+  let selected = e.target.value;
+
+  let filtered = allShows.filter((show) => {
+    if (selected === "allShows") {
+      return allShows;
+    } else if (show.name == selected) {
+      return `${show.name}`;
+    }
+  });
+  h3.innerText = `Displaying ${filtered.length}/${allEpisodes.length}`;
+  makePageForEpisodes(filtered);
+});
+
+window.onload = makePageForEpisodes(getAllEpisodes()); //setup

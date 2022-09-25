@@ -2,19 +2,48 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>TV Show Project | Riyaaz Singh (Riyaazct)</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
-    <div id="searchAndSelectElements">
-      <select id="select" name="search">
+    <div id="searchContainer"></div>
+    <!-- container for select  -->
+    <div id="selectContainer">
+      <!-- select for episodes -->
+      <select id="select" name="select2">
         <option id="test" value="all">All Episodes</option>
       </select>
+      <!-- select for shows -->
+      <select id="select2" name="shows">
+        <option value="allShows">All Shows</option>
+      </select>
     </div>
+
     <div id="root"></div>
+
+    <!--TVMAZE insert-->
+    <div id="tvmaze">
+      <div>
+        <h5>Data for this website supplied by</h5>
+      </div>
+
+      <div>
+        <a href="https://tvmaze.com/" target="_blank">
+          <img
+            src="https://static.tvmaze.com/images/tvm-header-logo.png"
+            alt="TVmaze logo"
+          />
+        </a>
+      </div>
+    </div>
+
+    <script src="shows.js"></script>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>

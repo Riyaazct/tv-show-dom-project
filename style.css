@@ -4,3 +4,16 @@ input {
   border-bottom: 1px solid gray;
   font-size: 25px;
 }
+
+#tvmaze {
+  text-align: center;
+}
+
+#selectContainer {
+  margin-top: 10px;
+  margin-left: 40px;
+}
+
+#searchContainer {
+  margin-left: 40px;
+}
