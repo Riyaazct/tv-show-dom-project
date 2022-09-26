@@ -10,8 +10,8 @@ rootElem.style.gridTemplateColumns =
   "repeat(auto-fit, minmax(320px,1fr))";
 rootElem.style.justifyContent = "center";
 const theFirstChild = body.firstChild;
-let allEpisodes = [];
-allEpisodes = getAllEpisodes(); // remove when done
+// let allEpisodes = [];
+allEpisodes = getAllEpisodes();
 
 function setup() {
   fetch("https://api.tvmaze.com/shows/82/episodes")
@@ -30,6 +30,7 @@ function setup() {
     });
 }
 
+// function to make the page for all episodes
 function makePageForEpisodes(episodeList) {
   const htmlString = episodeList
     .map((episode) => {
@@ -87,7 +88,6 @@ search.addEventListener("keyup", (e) => {
 const select = document.getElementById("select");
 
 // // Loop for episodes to appear in the select dropdown
-
 allEpisodes.map((episode) => {
   const option = document.createElement("option");
   option.value = episode.name;
@@ -95,7 +95,7 @@ allEpisodes.map((episode) => {
   select.appendChild(option);
 });
 
-select.addEventListener("click", (e) => {
+select.addEventListener("change", (e) => {
   let selected = e.target.value;
   let filtered = allEpisodes.filter((episode) => {
     if (selected === "all") {
@@ -108,29 +108,45 @@ select.addEventListener("click", (e) => {
   makePageForEpisodes(filtered);
 });
 
+// Section for all shows and requirements for level 400
 const allShows = getAllShows();
-// select for shows
 
+// select for shows
 const select2 = document.querySelector("#select2");
+
 allShows.map((show) => {
   const option = document.createElement("option");
-  option.value = show.name;
+  option.value = show.id;
   option.innerText = `${show.name}`;
   select2.appendChild(option);
 });
 
-select2.addEventListener("click", (e) => {
-  let selected = e.target.value;
+function episodesCompiled(api) {
+  fetch(api)
+    .then((response) => {
+      if (response.status >= 200 && response.status <= 299) {
+        return response.json();
+      } else {
+        throw new Error(
+          `Encountered something unexpected: ${response.status} ${response.statusText}`
+        );
+      }
+    })
+    .then((data) => {
+      makePageForEpisodes(data);
+      allEpisodes = data;
+    });
+}
 
-  let filtered = allShows.filter((show) => {
-    if (selected === "allShows") {
-      return allShows;
-    } else if (show.name == selected) {
-      return `${show.name}`;
-    }
-  });
-  h3.innerText = `Displaying ${filtered.length}/${allEpisodes.length}`;
-  makePageForEpisodes(filtered);
+// Event listener for select dropdown
+select2.addEventListener("change", (e) => {
+  let storedId = e.target.value;
+  let apiStored = "https://api.tvmaze.com/shows/";
+  let apiEnd = "/episodes";
+  let result = apiStored + storedId + apiEnd;
+  episodesCompiled(result);
 });
 
-window.onload = makePageForEpisodes(getAllEpisodes()); //setup
+//
+
+window.onload = setup;
