@@ -10,24 +10,27 @@ rootElem.style.gridTemplateColumns =
   "repeat(auto-fit, minmax(320px,1fr))";
 rootElem.style.justifyContent = "center";
 const theFirstChild = body.firstChild;
-// let allEpisodes = [];
-allEpisodes = getAllEpisodes();
+allEpisodes = getAllEpisodes(); //variable to store episodes for mapping
+const allShows = getAllShows(); //variable to store shows for mapping
 
 function setup() {
-  fetch("https://api.tvmaze.com/shows/82/episodes")
-    .then((response) => {
-      if (response.status >= 200 && response.status <= 299) {
-        return response.json();
-      } else {
-        throw new Error(
-          `Encountered something unexpected: ${response.status} ${response.statusText}`
-        );
-      }
-    })
-    .then((data) => {
-      makePageForEpisodes(data);
-      allEpisodes = data;
-    });
+  // fetch("https://api.tvmaze.com/shows/82/episodes")
+  //   .then((response) => {
+  //     if (response.status >= 200 && response.status <= 299) {
+  //       return response.json();
+  //     } else {
+  //       throw new Error(
+  //         `Encountered something unexpected: ${response.status} ${response.statusText}`
+  //       );
+  //     }
+  //   })
+  //   .then((data) => {
+  // //     allEpisodes = data;
+  //     makePageForEpisodes(allEpisodes);
+  //     populateSelect(allEpisodes);
+  //   });
+  makePageForAllShows(allShows);
+  // makePageForEpisodes(allEpisodes);
 }
 
 // function to make the page for all episodes
@@ -44,6 +47,30 @@ function makePageForEpisodes(episodeList) {
               <img src = ${episode.image.medium} style = "margin-top: 10px"></img> 
               <div>
                 <p >${episode.summary}</p>
+              </div>
+        </li>
+    </div>
+    </ul> `;
+    })
+    .join("");
+  rootElem.innerHTML = htmlString;
+}
+// *******************************busy working here*********************
+
+//function to make page for all shows
+function makePageForAllShows(showList) {
+  const htmlString = showList
+    .map((show) => {
+      return `
+    <ul>
+    <div style = "background-color: white; border: 1px solid lightGray; border-radius: 20px; padding: 20px 30px 0 30px; text-align: center; height: 550px">
+          <li class = "episode" style = "list-style-type: none">
+              <h3>
+                   ${show.name}
+              </h3>
+              <img src = ${show.image?.medium} style = "margin-top: 10px"/>
+              <div>
+                <p>${show.summary}</p>
               </div>
         </li>
     </div>
@@ -87,13 +114,15 @@ search.addEventListener("keyup", (e) => {
 // let listOfEpisodes = getAllEpisodes(); //this needs to be changed when done
 const select = document.getElementById("select");
 
-// // Loop for episodes to appear in the select dropdown
-allEpisodes.map((episode) => {
-  const option = document.createElement("option");
-  option.value = episode.name;
-  option.innerText = `S0${episode.season}E0${episode.number} - ${episode.name}`;
-  select.appendChild(option);
-});
+//  populate select dropdown with list of shows
+function populateSelect(list) {
+  list.map((episode) => {
+    const option = document.createElement("option");
+    option.value = episode.name;
+    option.innerText = `S0${episode.season}E0${episode.number} - ${episode.name}`;
+    select.appendChild(option);
+  });
+}
 
 select.addEventListener("change", (e) => {
   let selected = e.target.value;
@@ -109,7 +138,6 @@ select.addEventListener("change", (e) => {
 });
 
 // Section for all shows and requirements for level 400
-const allShows = getAllShows();
 
 // select for shows
 const select2 = document.querySelector("#select2");
@@ -121,6 +149,7 @@ allShows.map((show) => {
   select2.appendChild(option);
 });
 
+// Function to fetch new data using api created from captured ID
 function episodesCompiled(api) {
   fetch(api)
     .then((response) => {
@@ -134,19 +163,29 @@ function episodesCompiled(api) {
     })
     .then((data) => {
       makePageForEpisodes(data);
-      allEpisodes = data;
+      populateSelect2(data);
     });
 }
 
-// Event listener for select dropdown
+// Event listener for select dropdown that creates new api with captured show ID
 select2.addEventListener("change", (e) => {
   let storedId = e.target.value;
   let apiStored = "https://api.tvmaze.com/shows/";
   let apiEnd = "/episodes";
-  let result = apiStored + storedId + apiEnd;
-  episodesCompiled(result);
+  let result = apiStored + storedId + apiEnd; // concat the data to a variable to create the URL
+
+  episodesCompiled(result); // call the function with new data to display selected show's episodes.
 });
 
-//
+function populateSelect2(shows) {
+  shows.map((episode) => {
+    const option = document.createElement("option");
+    option.classList.add = "selectByDom";
+    option.value = episode.name;
+    option.innerText = `S0${episode.season}E0${episode.number} - ${episode.name}`;
+    select.appendChild(option);
+  });
+}
 
 window.onload = setup;
+// makePageForEpisodes(allEpisodes);
