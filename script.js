@@ -57,7 +57,7 @@ function makePageForEpisodes(episodeList) {
 }
 // *******************************busy working here*********************
 
-//function to make page for all shows
+//function to create the elements in the DOM displaying all the shows
 function makePageForAllShows(showList) {
   const htmlString = showList
     .map((show) => {
@@ -170,11 +170,17 @@ function episodesCompiled(api) {
 // Event listener for select dropdown that creates new api with captured show ID
 select2.addEventListener("change", (e) => {
   let storedId = e.target.value;
+  console.log(storedId);
   let apiStored = "https://api.tvmaze.com/shows/";
   let apiEnd = "/episodes";
   let result = apiStored + storedId + apiEnd; // concat the data to a variable to create the URL
-
-  episodesCompiled(result); // call the function with new data to display selected show's episodes.
+  if (storedId === "allShows") {
+    makePageForAllShows(allShows);
+    select.style.display = "none";
+  } else {
+    episodesCompiled(result); // call the function with new data to display selected show's episodes.
+    select.style.display = "inline";
+  }
 });
 
 function populateSelect2(shows) {
