@@ -3,59 +3,42 @@
 
 const body = document.querySelector("body");
 body.style.backgroundColor = "#f2f3f3";
-const rootElem = document.getElementById("root");
-rootElem.style.display = "grid";
-rootElem.style.gap = "10px";
-rootElem.style.gridTemplateColumns =
-  "repeat(auto-fit, minmax(320px,1fr))";
-rootElem.style.justifyContent = "center";
+const rootElem = document.querySelector("#root");
 const theFirstChild = body.firstChild;
-allEpisodes = getAllEpisodes(); //variable to store episodes for mapping
-const allShows = getAllShows(); //variable to store shows for mapping
+let showId;
+let allEpisodes = []; //variable to store episodes for mapping
+let allShows = getAllShows(); //variable to store shows for mapping
 
+// initial page setup
 function setup() {
-  // fetch("https://api.tvmaze.com/shows/82/episodes")
-  //   .then((response) => {
-  //     if (response.status >= 200 && response.status <= 299) {
-  //       return response.json();
-  //     } else {
-  //       throw new Error(
-  //         `Encountered something unexpected: ${response.status} ${response.statusText}`
-  //       );
-  //     }
-  //   })
-  //   .then((data) => {
-  // //     allEpisodes = data;
-  //     makePageForEpisodes(allEpisodes);
-  //     populateSelect(allEpisodes);
-  //   });
   makePageForAllShows(allShows);
-  // makePageForEpisodes(allEpisodes);
 }
 
-// function to make the page for all episodes
+// function to make the page for all episodes in DOM
 function makePageForEpisodes(episodeList) {
+  rootElem.id = "rootForEpisodes";
   const htmlString = episodeList
     .map((episode) => {
       return `
-    <ul> 
-    <div style = "background-color: white; border: 1px solid lightGray; border-radius: 20px; padding: 20px 30px 0 30px; text-align: center; height: 550px">
-          <li class = "episode" style = "list-style-type: none">
+     <div class="rootClass">
+         <ul> 
+    <div class="boxForEpisodes" style = "background-color: white; border: 1px solid lightGray; border-radius: 20px; padding: 20px 30px 0 30px; text-align: center; height: 550px">
+          <li class = "episode2" style = "list-style-type: none">
               <h3>
                   S0${episode.season}E0${episode.number} - ${episode.name}
               </h3>
-              <img src = ${episode.image.medium} style = "margin-top: 10px"></img> 
+              <img src = ${episode.image?.medium} style = "margin-top: 10px"></img> 
               <div>
                 <p >${episode.summary}</p>
               </div>
         </li>
     </div>
-    </ul> `;
+    </ul>
+     </div>`;
     })
     .join("");
   rootElem.innerHTML = htmlString;
 }
-// *******************************busy working here*********************
 
 //function to create the elements in the DOM displaying all the shows
 function makePageForAllShows(showList) {
@@ -63,14 +46,19 @@ function makePageForAllShows(showList) {
     .map((show) => {
       return `
     <ul>
-    <div style = "background-color: white; border: 1px solid lightGray; border-radius: 20px; padding: 20px 30px 0 30px; text-align: center; height: 550px">
+          <div class="boxTitle">
+          <h1>${show.name}</h1></div>
+          <div class="showContainer">
           <li class = "episode" style = "list-style-type: none">
-              <h3>
-                   ${show.name}
-              </h3>
+              <div class = "showBox-1">
               <img src = ${show.image?.medium} style = "margin-top: 10px"/>
-              <div>
                 <p>${show.summary}</p>
+              </div>
+              <div class = "showBox-2">
+                    <p><strong>Genre:</strong>  ${show.genres}</p>
+                    <p><strong>Status:</strong>  ${show.status}</p>
+                    <p><strong>Rating:</strong>  ${show.rating.average}</p>
+                    <p><strong>Runtime:</strong>  ${show.runtime}</p>
               </div>
         </li>
     </div>
@@ -79,6 +67,7 @@ function makePageForAllShows(showList) {
     .join("");
   rootElem.innerHTML = htmlString;
 }
+// genres, status, rating, and runtime
 
 // Search box div
 let searchContainer = document.querySelector("#searchContainer");
@@ -99,22 +88,22 @@ searchContainer.appendChild(h3);
 // Event listener for search
 search.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
-  const filteredEpisodes = allEpisodes.filter((episode) => {
+  const filteredEpisodes = allShows.filter((show) => {
     return (
-      episode.name.toLowerCase().includes(searchString) ||
-      episode.summary.toLowerCase().includes(searchString)
+      show.name.toLowerCase().includes(searchString) ||
+      show.summary.toLowerCase().includes(searchString)
     );
   });
   let filteredLength = filteredEpisodes.length;
-  h3.innerText = `Displaying ${filteredLength}/${allEpisodes.length}`;
-  makePageForEpisodes(filteredEpisodes);
+  h3.innerText = `Displaying ${filteredLength}/${allShows.length}`;
+  makePageForAllShows(filteredEpisodes);
 });
 
 // Select field for level 300
 // let listOfEpisodes = getAllEpisodes(); //this needs to be changed when done
 const select = document.getElementById("select");
 
-//  populate select dropdown with list of shows
+//  populate select dropdown with list of episodes
 function populateSelect(list) {
   list.map((episode) => {
     const option = document.createElement("option");
@@ -123,7 +112,7 @@ function populateSelect(list) {
     select.appendChild(option);
   });
 }
-
+// event listener for the select dropdown with episode list
 select.addEventListener("change", (e) => {
   let selected = e.target.value;
   let filtered = allEpisodes.filter((episode) => {
@@ -133,7 +122,7 @@ select.addEventListener("change", (e) => {
       return `S0${episode.season}E0${episode.number} - ${episode.name}`;
     }
   });
-  h3.innerText = `Displaying ${filtered.length}/${allEpisodes.length}`;
+
   makePageForEpisodes(filtered);
 });
 
@@ -149,7 +138,7 @@ allShows.map((show) => {
   select2.appendChild(option);
 });
 
-// Function to fetch new data using api created from captured ID
+// Function to fetch episode data using api created from captured ID
 function episodesCompiled(api) {
   fetch(api)
     .then((response) => {
@@ -164,22 +153,26 @@ function episodesCompiled(api) {
     .then((data) => {
       makePageForEpisodes(data);
       populateSelect2(data);
+      allEpisodes = data;
     });
 }
 
 // Event listener for select dropdown that creates new api with captured show ID
 select2.addEventListener("change", (e) => {
   let storedId = e.target.value;
-  console.log(storedId);
+  showId = storedId;
   let apiStored = "https://api.tvmaze.com/shows/";
   let apiEnd = "/episodes";
   let result = apiStored + storedId + apiEnd; // concat the data to a variable to create the URL
   if (storedId === "allShows") {
     makePageForAllShows(allShows);
     select.style.display = "none";
+    rootElem.id = "root";
   } else {
     episodesCompiled(result); // call the function with new data to display selected show's episodes.
     select.style.display = "inline";
+    populateSelect(allEpisodes);
+    select.innerText = "";
   }
 });
 
@@ -195,3 +188,6 @@ function populateSelect2(shows) {
 
 window.onload = setup;
 // makePageForEpisodes(allEpisodes);
+
+// dropdown (select) for episodes not resetting to reflect selects show.
+// search bar needs to work for both episodes and for the shows
