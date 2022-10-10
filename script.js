@@ -71,14 +71,12 @@ function makePageForAllShows(showList) {
 
 // Search box div
 let searchContainer = document.querySelector("#searchContainer");
-searchContainer.style.width = "100%";
 
 // search input field
 const input = document.createElement("input");
 input.autocomplete = "off";
 input.type = "text";
 input.id = "search";
-input.style.marginLeft = "auto";
 input.placeholder = "Search";
 searchContainer.append(input);
 const h3 = document.createElement("h3");
@@ -106,7 +104,6 @@ search.addEventListener("keyup", (e) => {
       );
     });
     let filteredLength = filteredShows.length;
-    h3.innerText = `Displaying ${filteredLength}/${allShows.length}`;
     makePageForAllShows(filteredShows);
   }
 });
@@ -179,11 +176,13 @@ select2.addEventListener("change", (e) => {
     makePageForAllShows(allShows);
     select.style.display = "none";
     rootElem.id = "root";
+    h3.innerText = "";
   } else {
     episodesCompiled(result); // call the function with new data to display selected show's episodes.
     select.style.display = "inline";
     populateSelect(allEpisodes);
     select.innerText = "";
+    h3.innerText = "";
   }
 });
 

@@ -88,3 +88,13 @@ input {
   gap: 10px;
   padding: 10px;
 }
+
+#searchContainer {
+  display: flex;
+  width: 25vw;
+  /* margin-left: auto; */
+}
+
+#search:focus {
+  outline: none;
+}
