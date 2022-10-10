@@ -88,15 +88,27 @@ searchContainer.appendChild(h3);
 // Event listener for search
 search.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
-  const filteredEpisodes = allShows.filter((show) => {
-    return (
-      show.name.toLowerCase().includes(searchString) ||
-      show.summary.toLowerCase().includes(searchString)
-    );
-  });
-  let filteredLength = filteredEpisodes.length;
-  h3.innerText = `Displaying ${filteredLength}/${allShows.length}`;
-  makePageForAllShows(filteredEpisodes);
+  if (rootElem.id === "rootForEpisodes") {
+    const filteredEpisodes = allEpisodes.filter((show) => {
+      return (
+        show.name.toLowerCase().includes(searchString) ||
+        show.summary.toLowerCase().includes(searchString)
+      );
+    });
+    let filteredLength = filteredEpisodes.length;
+    h3.innerText = `Displaying ${filteredLength}/${allEpisodes.length}`;
+    makePageForEpisodes(filteredEpisodes);
+  } else if (rootElem.id === "root") {
+    const filteredShows = allShows.filter((show) => {
+      return (
+        show.name.toLowerCase().includes(searchString) ||
+        show.summary.toLowerCase().includes(searchString)
+      );
+    });
+    let filteredLength = filteredShows.length;
+    h3.innerText = `Displaying ${filteredLength}/${allShows.length}`;
+    makePageForAllShows(filteredShows);
+  }
 });
 
 // Select field for level 300
@@ -156,7 +168,6 @@ function episodesCompiled(api) {
       allEpisodes = data;
     });
 }
-
 // Event listener for select dropdown that creates new api with captured show ID
 select2.addEventListener("change", (e) => {
   let storedId = e.target.value;
