@@ -103,7 +103,6 @@ search.addEventListener("keyup", (e) => {
         show.summary.toLowerCase().includes(searchString)
       );
     });
-    let filteredLength = filteredShows.length;
     makePageForAllShows(filteredShows);
   }
 });
