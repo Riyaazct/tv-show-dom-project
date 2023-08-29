@@ -22,7 +22,7 @@ function makePageForEpisodes(episodeList) {
       return `
      <div class="rootClass">
          <ul> 
-    <div class="boxForEpisodes" style = "background-color: white; border: 1px solid lightGray; border-radius: 20px; padding: 20px 30px 0 30px; text-align: center; height: 550px">
+    <div class="boxForEpisodes" style = "background-color: white; border: 1px solid lightGray; border-radius: 20px; padding: 20px 30px 0 30px; text-align: center; height: auto ">
           <li class = "episode2" style = "list-style-type: none">
               <h3>
                   S0${episode.season}E0${episode.number} - ${episode.name}
@@ -45,24 +45,28 @@ function makePageForAllShows(showList) {
   const htmlString = showList
     .map((show) => {
       return `
-    <ul>
-          <div class="boxTitle">
-          <h1>${show.name}</h1></div>
-          <div class="showContainer">
-          <li class = "episode" style = "list-style-type: none">
-              <div class = "showBox-1">
-              <img src = ${show.image?.medium} style = "margin-top: 10px"/>
-                <p>${show.summary}</p>
-              </div>
-              <div class = "showBox-2">
-                    <p><strong>Genre:</strong>  ${show.genres}</p>
-                    <p><strong>Status:</strong>  ${show.status}</p>
-                    <p><strong>Rating:</strong>  ${show.rating.average}</p>
-                    <p><strong>Runtime:</strong>  ${show.runtime}</p>
-              </div>
-        </li>
+    <div class="showContent">
+  <div class="imageContainer">
+    <img src="${show.image?.original}" alt="${show.name}" />
+  </div>
+  <div class="textContainer">
+    <h2>${show.name}</h2>
+    <div class="showSummary">
+      <p>${show.summary}</p>
     </div>
-    </ul> `;
+    <div class="showDetails">
+      <ul>
+        <li><strong>Genre:</strong> ${show.genres.join(", ")}</li>
+        <li><strong>Status:</strong> ${show.status}</li>
+        <li><strong>Rating:</strong> ${
+          show.rating.average || "N/A"
+        }</li>
+        <li><strong>Runtime:</strong> ${show.runtime} minutes</li>
+      </ul>
+    </div>
+  </div>
+</div>
+ `;
     })
     .join("");
   rootElem.innerHTML = htmlString;
@@ -74,8 +78,8 @@ let searchContainer = document.querySelector("#searchContainer");
 
 // search input field
 const input = document.createElement("input");
-input.autocomplete = "off";
-input.type = "text";
+// input.autocomplete = "off";
+input.type = "search";
 input.id = "search";
 input.placeholder = "Search";
 searchContainer.append(input);

@@ -12,25 +12,37 @@
   </head>
 
   <body>
-    <div id="searchContainer"></div>
-    <!-- container for select  -->
-    <div id="selectContainer">
-      <!-- select for shows -->
-      <select id="select2" name="shows">
-        <option value="allShows">All Shows</option>
-      </select>
-      <!-- select for episodes -->
-      <select id="select" name="episodes" style="display: none">
-        <option class="default" value="allEpisodes">
-          All Episodes
-        </option>
-      </select>
-    </div>
+    <header>
+      <nav>
+        <div>
+          <h1>ShowFlix</h1>
+          <p>Your Ultimate TV Show Companion</p>
+        </div>
+        <div id="searchContainer"></div>
+      </nav>
+    </header>
+    <main>
+      <!-- container for select  -->
+      <div id="selectContainer">
+        <h2>Select a TV Show</h2>
 
-    <div id="root"></div>
+        <!-- select for shows -->
+        <select id="select2" name="shows">
+          <option value="allShows">All Shows</option>
+        </select>
+        <!-- select for episodes -->
+        <select id="select" name="episodes" style="display: none">
+          <option class="default" value="allEpisodes">
+            All Episodes
+          </option>
+        </select>
+      </div>
+
+      <div id="root"></div>
+    </main>
 
     <!--TVMAZE insert-->
-    <div id="tvmaze">
+    <footer id="tvmaze">
       <div>
         <h5>Data for this website supplied by</h5>
       </div>
@@ -43,7 +55,7 @@
           />
         </a>
       </div>
-    </div>
+    </footer>
 
     <script src="shows.js"></script>
 
