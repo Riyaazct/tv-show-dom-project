@@ -79,6 +79,9 @@ function makePageForAllShows(showList) {
               <li><strong>Runtime:</strong> ${
                 show.runtime
               } minutes</li>
+              <li><strong>Link:</strong><a href=${
+                show.url
+              } target="_blank"><span> ${show.url}</span></a></li>
               </ul>
           </div>
         </div>

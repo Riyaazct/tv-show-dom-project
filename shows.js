@@ -3051,58 +3051,58 @@ function getAllShows() {
         },
       },
     },
-    {
-      id: 4366,
-      url: "http://www.tvmaze.com/shows/4366/who-do-you-think-you-are",
-      name: "Who Do You Think You Are?",
-      type: "Documentary",
-      language: "English",
-      genres: ["Family", "History"],
-      status: "Running",
-      runtime: 60,
-      premiered: "2004-10-12",
-      officialSite: "http://www.bbc.co.uk/programmes/b007t575",
-      schedule: {
-        time: "21:00",
-        days: ["Wednesday"],
-      },
-      rating: {
-        average: 8.9,
-      },
-      weight: 82,
-      network: {
-        id: 12,
-        name: "BBC One",
-        country: {
-          name: "United Kingdom",
-          code: "GB",
-          timezone: "Europe/London",
-        },
-      },
-      webChannel: null,
-      externals: {
-        tvrage: null,
-        thetvdb: 80522,
-        imdb: "tt0429466",
-      },
-      image: {
-        medium:
-          "http://static.tvmaze.com/uploads/images/medium_portrait/20/51641.jpg",
-        original:
-          "http://static.tvmaze.com/uploads/images/original_untouched/20/51641.jpg",
-      },
-      summary:
-        "<p>Series in which celebrities trace their ancestry, discovering secrets and surprises from their past.</p>",
-      updated: 1573938982,
-      _links: {
-        self: {
-          href: "http://api.tvmaze.com/shows/4366",
-        },
-        previousepisode: {
-          href: "http://api.tvmaze.com/episodes/1702202",
-        },
-      },
-    },
+    // {
+    //   id: 4366,
+    //   url: "http://www.tvmaze.com/shows/4366/who-do-you-think-you-are",
+    //   name: "Who Do You Think You Are?",
+    //   type: "Documentary",
+    //   language: "English",
+    //   genres: ["Family", "History"],
+    //   status: "Running",
+    //   runtime: 60,
+    //   premiered: "2004-10-12",
+    //   officialSite: "http://www.bbc.co.uk/programmes/b007t575",
+    //   schedule: {
+    //     time: "21:00",
+    //     days: ["Wednesday"],
+    //   },
+    //   rating: {
+    //     average: 8.9,
+    //   },
+    //   weight: 82,
+    //   network: {
+    //     id: 12,
+    //     name: "BBC One",
+    //     country: {
+    //       name: "United Kingdom",
+    //       code: "GB",
+    //       timezone: "Europe/London",
+    //     },
+    //   },
+    //   webChannel: null,
+    //   externals: {
+    //     tvrage: null,
+    //     thetvdb: 80522,
+    //     imdb: "tt0429466",
+    //   },
+    //   image: {
+    //     medium:
+    //       "http://static.tvmaze.com/uploads/images/medium_portrait/20/51641.jpg",
+    //     original:
+    //       "http://static.tvmaze.com/uploads/images/original_untouched/20/51641.jpg",
+    //   },
+    //   summary:
+    //     "<p>Series in which celebrities trace their ancestry, discovering secrets and surprises from their past.</p>",
+    //   updated: 1573938982,
+    //   _links: {
+    //     self: {
+    //       href: "http://api.tvmaze.com/shows/4366",
+    //     },
+    //     previousepisode: {
+    //       href: "http://api.tvmaze.com/episodes/1702202",
+    //     },
+    //   },
+    // },
     {
       id: 2193,
       url: "http://www.tvmaze.com/shows/2193/jeopardy",
