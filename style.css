@@ -18,7 +18,11 @@ nav {
   z-index: 1000;
 }
 nav input {
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
+  background-color: #3b3b3b;
+  color: #ffffff;
+  border-color: rgb(150, 17, 17);
+  padding: 4px;
 }
 
 input:focus {
@@ -53,6 +57,13 @@ main {
   color: rgb(255, 255, 255);
   border: 1px solid rgba(150, 17, 17, 0.349);
   z-index: 1000;
+}
+
+#selectContainer select {
+  background-color: #3b3b3b;
+  color: #ffffff;
+  border-color: rgb(150, 17, 17);
+  padding: 4px;
 }
 
 #selectContainer h3 {
