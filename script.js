@@ -99,7 +99,7 @@ let searchContainer = document.querySelector("#searchContainer");
 const input = document.createElement("input");
 input.type = "search";
 input.id = "search";
-input.placeholder = "Search";
+input.placeholder = "Search...";
 searchContainer.append(input);
 const h3 = document.createElement("h3");
 h3.style.margin = "0 0 0 10px";
