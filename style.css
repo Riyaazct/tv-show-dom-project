@@ -14,6 +14,7 @@ nav {
   padding: 15px 30px;
   background-color: rgb(0, 0, 0);
   color: rgb(150, 17, 17);
+  z-index: 20;
 }
 nav input {
   background-color: rgb(255, 255, 255);
@@ -33,20 +34,27 @@ main {
 
 #root {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
+  /* grid-template-columns: 1fr; */
+  grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
+  gap: 25px;
+  background-color: black;
   padding: 10px;
 }
 
 /* Style for the entire show content */
 .showContent {
   display: flex;
-  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 20px;
+  border-color: rgb(150, 17, 17);
+  box-shadow: 3px 2px 15px rgb(150, 17, 17);
+  background-image: linear-gradient(to top, black, rgb(63, 63, 63));
+  width: 100%;
+}
+
+.showContent:hover {
+  transform: scale(1.01);
+  transition: 0.7s;
 }
 
 /* Style for the image container */
@@ -57,8 +65,11 @@ main {
 
 /* Style for the show image */
 .imageContainer img {
-  max-width: 100%;
+  min-width: 55%;
+  max-width: 380px;
   height: auto;
+  min-height: 100%;
+  border-radius: 5px;
 }
 
 /* Style for the text container */
@@ -73,30 +84,38 @@ main {
 .textContainer h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
+  color: rgb(235, 179, 179);
+  padding: 0 5px;
+  font-weight: 900;
 }
 
 /* Style for the show summary */
 .showSummary p {
   font-size: 1.1rem;
+  padding: 0 10px;
   margin-bottom: 15px;
+  color: white;
 }
 
 /* Style for the show details list */
 .showDetails ul {
   list-style: none;
-  padding: 0;
+  padding: 0 10px;
 }
 
 /* Style for each detail item */
 .showDetails li {
   font-size: 1rem;
   margin-bottom: 5px;
+  color: white;
 }
 
 /* Style for the strong elements within details */
 .showDetails strong {
   font-weight: bold;
   margin-right: 5px;
+  /* color: rgb(150, 17, 17); */
+  color: rgb(235, 179, 179);
 }
 
 /* Media query for responsive design */
@@ -114,7 +133,7 @@ main {
 
 /* Show details - genre etc.. */
 .showDetails {
-  padding: 0 15px;
+  padding: 0;
 }
 
 input {
