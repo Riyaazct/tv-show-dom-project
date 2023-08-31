@@ -103,7 +103,7 @@ searchContainer.appendChild(h3);
 search.addEventListener("input", function () {
   const searchString = this.value.toLowerCase();
 
-  // Handle empty search
+  // Handle empty search and click on x in search input
   if (searchString === "") {
     if (rootElem === "rootForEpisodes") {
       makePageForEpisodes(allEpisodes);

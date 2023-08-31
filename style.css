@@ -84,7 +84,7 @@ main {
 #root {
   display: grid;
   /* grid-template-columns: 1fr; */
-  grid-template-columns: repeat(auto-fit, minmax(1fr));
+  grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
   gap: 25px;
   background-color: black;
   padding: 100px 25px 25px 25px;
@@ -175,6 +175,34 @@ main {
 /* Media query for responsive design */
 
 @media (max-width: 800px) {
+  nav {
+    flex-direction: column;
+    height: 130px;
+  }
+
+  nav h1 {
+    font-size: 1.8rem;
+  }
+
+  nav p {
+    font-size: 1rem;
+  }
+
+  nav input {
+    font-size: 1rem;
+  }
+
+  #selectContainer {
+    top: 130px;
+  }
+
+  #selectContainer select {
+    max-width: 150px;
+  }
+  #selectContainer h3 {
+    font-size: 1.1rem;
+  }
+
   #root {
     width: 100%;
     display: block;
@@ -261,4 +289,14 @@ input {
   max-width: 80%;
   text-align: left;
   font-size: 1.08rem;
+}
+
+#tvmaze {
+  background-color: black;
+  color: white;
+}
+#tvmaze h5 {
+  color: white;
+  padding: 10px;
+  font-size: 1.1rem;
 }
