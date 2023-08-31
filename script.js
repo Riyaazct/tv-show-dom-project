@@ -33,20 +33,14 @@ function makePageForEpisodes(episodeList) {
   const htmlString = episodeList
     .map((episode) => {
       return `
-      <div class="rootClass">
-        <ul>
-          <div class="boxForEpisodes" style="background-color: white; border: 1px solid lightGray; border-radius: 20px; padding: 20px 30px 0 30px; text-align: center; height: auto">
-            <li class="episode2" style="list-style-type: none">
-              <h3>
+          <div class="boxForEpisodes" >            
+              <h2>
                 S0${episode.season}E0${episode.number} - ${episode.name}
-              </h3>
+              </h2>
               <img src="${episode.image?.medium}" style="margin-top: 10px"></img>
-              <div>
-                <p>${episode.summary}</p>
-              </div>
-            </li>
-          </div>
-        </ul>
+              
+                <p>${episode.summary}</p>            
+          
       </div>`;
     })
     .join("");
