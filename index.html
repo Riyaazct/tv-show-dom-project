@@ -23,19 +23,27 @@
     </header>
     <main>
       <!-- container for select  -->
-      <div id="selectContainer">
-        <h3>Select a TV Show</h3>
+      <div class="selectSection">
+        <div class="selectButtons">
+          <button class="showButton">Back to Shows</button>
+          <button class="episodeButton">Back to Episodes</button>
+        </div>
+        <div id="selectContainer">
+          <h3>Select a TV Show</h3>
 
-        <!-- select for shows -->
-        <select id="select2" name="shows">
-          <option value="allShows">All Shows</option>
-        </select>
-        <!-- select for episodes -->
-        <select id="select" name="episodes" style="display: none">
-          <option class="default" value="allEpisodes">
-            All Episodes
-          </option>
-        </select>
+          <!-- select for shows -->
+          <select id="select2" name="shows">
+            <option value="allShows">All Shows</option>
+          </select>
+          <!-- select for episodes -->
+          <div class="episodeListDropdown">
+            <select id="select" name="episodes" style="display: none">
+              <option class="default" value="allEpisodes">
+                All Episodes
+              </option>
+            </select>
+          </div>
+        </div>
       </div>
 
       <div id="root"></div>

@@ -41,33 +41,42 @@ input:focus {
 }
 
 nav h1 {
-  font-size: 2.3rem;
-  letter-spacing: 0.2rem;
+  font-size: 2.1rem;
+  font-weight: bolder;
+  letter-spacing: 0.1rem;
 }
 
 nav p {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 main {
   padding-top: 100px;
 }
 
-#selectContainer {
+.selectSection {
   position: fixed;
-  padding: 20px;
-  height: 80px;
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 10px;
+  align-items: center;
+  z-index: 1000;
   left: 0;
   top: 100;
+  height: 80px;
+  border: 1px solid rgba(150, 17, 17, 0.349);
+}
+
+#selectContainer {
+  padding: 20px;
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0;
+  gap: 10px;
   background-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
-  border: 1px solid rgba(150, 17, 17, 0.349);
-  z-index: 1000;
+  display: flex;
+  justify-content: center;
 }
 
 #selectContainer select {
@@ -81,10 +90,28 @@ main {
   letter-spacing: 0.2rem;
 }
 
+.selectButtons {
+  display: flex;
+  gap: 10px;
+  padding-left: 20px;
+}
+
+.selectButtons button {
+  display: none;
+  background-color: #3b3b3b;
+  color: rgb(255, 255, 255);
+  /* font-weight: bold; */
+  border-color: rgb(150, 17, 17);
+  border-radius: 5px;
+  width: max-content;
+  padding: 5px;
+  font-size: 1.07rem;
+}
+
 #root {
   display: grid;
   /* grid-template-columns: 1fr; */
-  grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(1fr));
   gap: 25px;
   background-color: black;
   padding: 100px 25px 25px 25px;
@@ -247,7 +274,7 @@ input {
 
 #rootForEpisodes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 20px;
   padding: 0 20px;
   padding-top: 100px;
@@ -278,6 +305,14 @@ input {
   transition: 0.3s;
 }
 
+.boxForEpisodes h2 {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  color: rgb(235, 179, 179);
+  padding: 0 5px;
+  font-weight: 900;
+}
+
 .boxForEpisodes img {
   max-width: 300px;
   max-height: 300px;
@@ -285,10 +320,10 @@ input {
 }
 
 .boxForEpisodes p {
-  padding: 15px;
-  max-width: 80%;
-  text-align: left;
-  font-size: 1.08rem;
+  font-size: 1.1rem;
+  padding: 0 10px;
+  margin-bottom: 10px;
+  color: white;
 }
 
 #tvmaze {

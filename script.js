@@ -9,22 +9,29 @@ body.style.backgroundColor = "#f2f3f3";
 const rootElem = document.querySelector("#root");
 const theFirstChild = body.firstChild;
 
-let showId; // Store the current show ID
 let allEpisodes = []; // Store episodes for mapping
-let allShows = getAllShows(); // Store shows for mapping
+let allShows = []; // Store shows for mapping
 
 // sort shows by title
-allShows.sort((a, b) => {
-  if (a.name.toLowerCase() < b.name.toLowerCase()) {
-    return -1;
-  } else {
-    return 1;
-  }
-});
+function sortAlphabetically(allShows) {
+  allShows.sort((a, b) => {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+}
 
 // Initial page setup
-function setup() {
+async function setup() {
+  const response = await fetch("https://api.tvmaze.com/shows");
+  const data = await response.json();
+  allShows = data;
+
   makePageForAllShows(allShows);
+  // sortAlphabetically(allShows);
+  populateAllShowsDropdown(allShows);
 }
 
 // Function to create DOM elements for displaying all episodes
@@ -49,6 +56,7 @@ function makePageForEpisodes(episodeList) {
 
 // Function to create DOM elements for displaying all shows
 function makePageForAllShows(showList) {
+  sortAlphabetically(showList);
   const htmlString = showList
     .map((show) => {
       return `
@@ -107,7 +115,7 @@ search.addEventListener("input", function () {
   if (searchString === "") {
     if (rootElem === "rootForEpisodes") {
       makePageForEpisodes(allEpisodes);
-    } else {
+    } else if (rootElem === "root") {
       setup();
     }
   }
@@ -136,7 +144,8 @@ search.addEventListener("input", function () {
 
 // Select field for level 300
 const select = document.getElementById("select");
-
+const showButton = document.querySelector(".showButton");
+const episodeButton = document.querySelector(".episodeButton");
 // Populate select dropdown with list of episodes
 function populateSelect(list) {
   list.map((episode) => {
@@ -159,6 +168,7 @@ select.addEventListener("change", (e) => {
   });
 
   makePageForEpisodes(filtered);
+  episodeButton.style.display = "flex";
 });
 
 // Section for all shows and requirements for level 400
@@ -167,12 +177,14 @@ select.addEventListener("change", (e) => {
 const select2 = document.querySelector("#select2");
 
 // Populate select dropdown with list of shows
-allShows.map((show) => {
-  const option = document.createElement("option");
-  option.value = show.id;
-  option.innerText = `${show.name}`;
-  select2.appendChild(option);
-});
+const populateAllShowsDropdown = (data) => {
+  data.map((show) => {
+    const option = document.createElement("option");
+    option.value = show.id;
+    option.innerText = `${show.name}`;
+    select2.appendChild(option);
+  });
+};
 
 // Function to fetch episode data using API created from captured ID
 function episodesCompiled(api) {
@@ -196,24 +208,40 @@ function episodesCompiled(api) {
 // Event listener for select dropdown that creates new API with captured show ID
 select2.addEventListener("change", (e) => {
   let storedId = e.target.value;
-  showId = storedId;
-  let apiStored = "https://api.tvmaze.com/shows/";
-  let apiEnd = "/episodes";
-  let result = apiStored + storedId + apiEnd;
+
+  let apiStored = `https://api.tvmaze.com/shows/${storedId}/episodes`;
 
   // Handle case for displaying all shows
   if (storedId === "allShows") {
     makePageForAllShows(allShows);
-    select.style.display = "none";
     rootElem.id = "root";
     h3.innerText = "";
+    showButton.style.display = "none";
+    episodeButton.style.display = "none";
+    select.style.display = "none";
   } else {
-    episodesCompiled(result);
+    showButton.style.display = "flex";
     select.style.display = "inline";
+    episodesCompiled(apiStored);
     populateSelect(allEpisodes);
+
     select.innerText = "";
     h3.innerText = "";
   }
+});
+
+showButton.addEventListener("click", () => {
+  makePageForAllShows(allShows);
+  rootElem.id = "root";
+  h3.innerText = "";
+  showButton.style.display = "none";
+  episodeButton.style.display = "none";
+  select.style.display = "none";
+});
+
+episodeButton.addEventListener("click", () => {
+  makePageForEpisodes(allEpisodes);
+  episodeButton.style.display = "none";
 });
 
 // Function to populate second select dropdown with episodes
