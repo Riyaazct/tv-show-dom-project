@@ -117,6 +117,7 @@ main {
 /* Style for the entire show content */
 .showContent {
   display: flex;
+  flex-direction: row;
   border: 1px solid #ddd;
   border-radius: 10px;
   border-color: rgb(150, 17, 17);
@@ -193,69 +194,6 @@ main {
   margin-right: 5px;
   /* color: rgb(150, 17, 17); */
   color: rgb(235, 179, 179);
-}
-
-/* Media query for responsive design */
-
-@media (max-width: 800px) {
-  nav {
-    flex-direction: column;
-    height: 130px;
-    text-align: center;
-  }
-
-  nav h1 {
-    font-size: 1.8rem;
-    padding-bottom: 5px;
-  }
-
-  nav p {
-    font-size: 1rem;
-    padding-bottom: 10px;
-  }
-
-  nav input {
-    font-size: 1rem;
-  }
-
-  .selectSection {
-    top: 130px;
-  }
-
-  #selectContainer {
-    top: 130px;
-    margin-bottom: 10px;
-  }
-
-  #selectContainer select {
-    max-width: 150px;
-  }
-  #selectContainer h3 {
-    font-size: 1.1rem;
-  }
-
-  #root {
-    width: 100%;
-    display: block;
-  }
-
-  .showContent {
-    flex-direction: column;
-    /* max-width: 90%; */
-    margin: 30px auto;
-  }
-
-  .imageContainer,
-  .textContainer {
-    /* padding: 15px; */
-    display: flex;
-    justify-content: center;
-  }
-  .imageContainer img {
-    max-width: 200px;
-    height: auto;
-    min-height: 100%;
-  }
 }
 
 /* Show details - genre etc.. */
@@ -338,4 +276,97 @@ input {
   color: white;
   padding: 10px;
   font-size: 1.1rem;
+}
+
+/* Media query for responsive design */
+
+@media only screen and (max-width: 640px) {
+  .selectSection {
+    top: 140px;
+  }
+  #root {
+    padding-top: 160px;
+  }
+
+  #rootForEpisodes .boxForEpisodes:first-child {
+    margin-top: 100px;
+  }
+
+  #rootForEpisodes {
+    display: block;
+    width: 100%;
+    padding-top: 180px;
+  }
+  #rootForEpisodes .boxForEpisodes {
+    margin-bottom: 25px;
+  }
+
+  #selectContainer {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 800px) {
+  nav {
+    flex-direction: column;
+    height: 130px;
+    text-align: center;
+  }
+
+  nav h1 {
+    font-size: 1.8rem;
+    padding-bottom: 5px;
+  }
+
+  nav p {
+    font-size: 1rem;
+    padding-bottom: 10px;
+  }
+
+  nav input {
+    font-size: 1rem;
+  }
+
+  .selectSection {
+    top: 130px;
+  }
+
+  #selectContainer {
+    top: 130px;
+    margin: 10px;
+  }
+
+  #selectContainer select {
+    max-width: 150px;
+  }
+  #selectContainer h3 {
+    font-size: 1.1rem;
+  }
+
+  #root {
+    width: 100%;
+    display: block;
+  }
+
+  .showContent {
+    flex-direction: column;
+    margin: 35px auto;
+  }
+
+  .imageContainer,
+  .textContainer {
+    display: flex;
+    justify-content: center;
+  }
+  .imageContainer img {
+    /* max-width: 200px; */
+    height: auto;
+    min-height: 100%;
+  }
+  #rootForEpisodes .boxForEpisodes:first-child {
+    margin-top: 60px;
+  }
 }
