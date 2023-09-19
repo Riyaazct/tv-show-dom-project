@@ -201,22 +201,30 @@ main {
   nav {
     flex-direction: column;
     height: 130px;
+    text-align: center;
   }
 
   nav h1 {
     font-size: 1.8rem;
+    padding-bottom: 5px;
   }
 
   nav p {
     font-size: 1rem;
+    padding-bottom: 10px;
   }
 
   nav input {
     font-size: 1rem;
   }
 
+  .selectSection {
+    top: 130px;
+  }
+
   #selectContainer {
     top: 130px;
+    margin-bottom: 10px;
   }
 
   #selectContainer select {
@@ -234,7 +242,7 @@ main {
   .showContent {
     flex-direction: column;
     /* max-width: 90%; */
-    margin: 20px auto;
+    margin: 30px auto;
   }
 
   .imageContainer,
